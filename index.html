@@ -23,23 +23,67 @@
     <div class="metric-container">
       <h2>Crashtest expected-fails</h2>
       <h1 id="crashtest_fails">Loading...</h3>
+      <p>Warning: The chart is still under development, the data may not be correct</p>
+      <canvas id="crashtest_chart" width="400" height="100"></canvas>
     </div>
     <div class="metric-container">
       <h2>Reftest expected-fails</h2>
       <h1 id="reftest_fails">Coming soon</h3>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
-      fetch('data.json')
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(jsondata) {
-        var crashtest = document.getElementById('crashtest_fails');
-        crashtest.innerText = jsondata['crashtest_fails'] + "/" + jsondata['crashtest_total'];
-        /*
-        var reftest = document.getElementById('reftest_fails');
-        reftest.innerText = jsondata['reftest_fails'] + "/" + jsondata['reftest_total'];
-        */
+      window.addEventListener('load', function(){
+        // Download the data
+        fetch('data.json')
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(jsondata) {
+          var crashtest = document.getElementById('crashtest_fails');
+          crashtest.innerText = jsondata['crashtest_fails'] + "/" + jsondata['crashtest_total'];
+          /*
+          var reftest = document.getElementById('reftest_fails');
+          reftest.innerText = jsondata['reftest_fails'] + "/" + jsondata['reftest_total'];
+          */
+        });
+
+        //Charts
+        var mock_crashtest_data = [200, 180, 178, 168, 154, 143, 100]
+        var mock_crashtest_date = ["12/23", "12/24", "12/25", "12/26", "12/27", "12/28", "12/29"]
+        var data = {
+          labels: mock_crashtest_date,
+          datasets: [
+            {
+              label: "Crashtest Expected Failures",
+              fill: false,
+              lineTension: 0.1,
+              backgroundColor: "rgba(75,192,192,0.4)",
+              borderColor: "rgba(75,192,192,1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "rgba(75,192,192,1)",
+              pointBackgroundColor: "#fff",
+              pointBorderWidth: 1,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "rgba(75,192,192,1)",
+              pointHoverBorderColor: "rgba(220,220,220,1)",
+              pointHoverBorderWidth: 2,
+              pointRadius: 1,
+              pointHitRadius: 10,
+              data: mock_crashtest_data,
+              spanGaps: false,
+            }
+          ]
+        };
+
+        var ctx = document.getElementById("crashtest_chart");
+        var myLineChart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          //options: options
+        });
       });
 
     </script>
