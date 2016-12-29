@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Are We Stylo Yet?</title>
+    <style type="text/css" media="screen">
+      .metric-container {
+        box-shadow: 1em 1em 1em grey;
+        border: 1px solid grey;
+        border-radius: 1em;
+        margin: 1em;
+        padding: 1em;
+        text-align: center;
+      }
+      h1 {
+        font-size: 5em;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Are We Stylo Yet?</h2>
+    <div class="metric-container">
+      <h2>Crashtest expected-fails</h2>
+      <h1 id="crashtest_fails">Loading...</h3>
+    </div>
+    <div class="metric-container">
+      <h2>Reftest expected-fails</h2>
+      <h1 id="reftest_fails">Coming soon</h3>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+      fetch('data.json')
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(jsondata) {
+        var crashtest = document.getElementById('crashtest_fails');
+        crashtest.innerText = jsondata['crashtest_fails'] + "/" + jsondata['crashtest_total'];
+        /*
+        var reftest = document.getElementById('reftest_fails');
+        reftest.innerText = jsondata['reftest_fails'] + "/" + jsondata['reftest_total'];
+        */
+      });
+
+    </script>
+  </body>
+</html>
