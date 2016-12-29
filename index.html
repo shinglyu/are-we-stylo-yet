@@ -15,11 +15,17 @@
       }
       h1 {
         font-size: 5em;
+        margin: 0px;
       }
     </style>
   </head>
   <body>
     <h2>Are We Stylo Yet?</h2>
+    <div class="metric-container">
+      <h2>Remaining Properties</h2>
+      <p> Properties that are in Firefox but not in Stylo yet (<a href="https://manishearth.github.io/css-properties-list/">See what's missing</a>)</p>
+      <h1 id="properties">Loading...</h3>
+    </div>
     <div class="metric-container">
       <h2>Crashtest expected-fails</h2>
       <h1 id="crashtest_fails">Loading...</h3>
@@ -31,7 +37,10 @@
       <h1 id="reftest_fails">Coming soon</h3>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="css_properties_list.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
+
+
       window.addEventListener('load', function(){
         // Download the data
         fetch('data.json')
@@ -84,6 +93,17 @@
           data: data,
           //options: options
         });
+
+        // CSS properties
+        var diff = new Set(FIREFOX);
+        for (var elem of STYLO_ALL) {
+          diff.delete(elem);
+        }
+
+        var remaining_properties_count = diff.size;
+        var properties = document.getElementById('properties');
+        properties.innerText = remaining_properties_count + "/" + FIREFOX.size;
+
       });
 
     </script>
