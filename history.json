@@ -1,0 +1,9 @@
+[
+  {"time": "12/23", "crashtest_fails": 200, "crashtest_total": 3122},
+  {"time": "12/24", "crashtest_fails": 180, "crashtest_total": 3122},
+  {"time": "12/25", "crashtest_fails": 156, "crashtest_total": 3122},
+  {"time": "12/26", "crashtest_fails": 132, "crashtest_total": 3122},
+  {"time": "12/27", "crashtest_fails": 113, "crashtest_total": 3122},
+  {"time": "12/28", "crashtest_fails": 110, "crashtest_total": 3122},
+  {"time": "12/29", "crashtest_fails": 100, "crashtest_total": 3122}
+]
