@@ -28,22 +28,27 @@
     <div id="cards">
     <div class="metric-container">
       <h2>Remaining Properties</h2>
-      <p> Properties that are in Firefox but not in Stylo yet (<a href="https://manishearth.github.io/css-properties-list/">See what's missing</a>)</p>
+      <p> Properties that are in Firefox but not in Stylo yet (<a href="https://manishearth.github.io/css-properties-list/">See what's missing</a>), should reach 100%</p>
       <h1 id="properties">Loading...</h3>
     </div>
     <div class="metric-container">
-      <h2>Crashtest expected-fails</h2>
+      <h2>Crashtest failures</h2>
+      <p>Number of failures in crashtest, should reach 0%</p>
       <h1 id="crashtest_fails">Loading...</h3>
+      <!--
       <p>Warning: The chart is still under development, the data may not be correct</p>
       <canvas id="crashtest_chart" width="200" height="100"></canvas>
+      -->
+
     </div>
     <div class="metric-container">
-      <h2>Reftest expected-fails</h2>
+      <h2>Reftest failures</h2>
+      <p>Number of failures in reftest, should reach 0%</p>
       <h1 id="reftest_fails">Loading...</h3>
     </div>
     <div class="metric-container">
       <h2>Reftest disabled</h2>
-      <p>Crashes, intermittents</p>
+      <p>Crashes, intermittents; should reach 0%</p>
       <h1 id="reftest_disabled">Loading...</h3>
     </div>
     </div>
@@ -72,6 +77,7 @@
           reftest.innerText = jsondata['reftest_disabled'] + "/" + (jsondata['reftest_passes']+ jsondata['reftest_fails'] + jsondata['reftest_disabled'])+ " (" + percent + "%)";
         });
 
+        /*
         //Charts
         var mock_crashtest_data = [200, 180, 178, 168, 154, 143, 100]
         var mock_crashtest_date = ["12/23", "12/24", "12/25", "12/26", "12/27", "12/28", "12/29"]
@@ -109,6 +115,7 @@
           data: data,
           //options: options
         });
+        */
 
         // CSS properties
         var diff = new Set(FIREFOX);
