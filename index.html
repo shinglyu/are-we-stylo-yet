@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width" />
     <title>Are We Stylo Yet?</title>
     <style type="text/css" media="screen">
+      html {
+        background-color: grey;
+      }
       .metric-container {
-        box-shadow: 0.5em 0.5em 0.5em grey;
+        box-shadow: 0.5em 0.5em 0.5em black;
         border: 1px solid grey;
         border-radius: 1em;
         margin: 1em;
         padding: 1em;
         text-align: center;
+        background-color: lightgrey;
       }
       h1 {
         font-size: 5em;
@@ -52,6 +56,9 @@
       <h1 id="reftest_disabled">Loading...</h3>
     </div>
     </div>
+
+    <a href="https://github.com/shinglyu/are-we-stylo-yet"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="css_properties_list.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
@@ -79,35 +86,18 @@
 
         /*
         //Charts
-        var mock_crashtest_data = [200, 180, 178, 168, 154, 143, 100]
-        var mock_crashtest_date = ["12/23", "12/24", "12/25", "12/26", "12/27", "12/28", "12/29"]
-        var data = {
-          labels: mock_crashtest_date,
-          datasets: [
-            {
-              label: "Crashtest Expected Failures",
-              fill: false,
-              lineTension: 0.1,
-              backgroundColor: "rgba(75,192,192,0.4)",
-              borderColor: "rgba(75,192,192,1)",
-              borderCapStyle: 'butt',
-              borderDash: [],
-              borderDashOffset: 0.0,
-              borderJoinStyle: 'miter',
-              pointBorderColor: "rgba(75,192,192,1)",
-              pointBackgroundColor: "#fff",
-              pointBorderWidth: 1,
-              pointHoverRadius: 5,
-              pointHoverBackgroundColor: "rgba(75,192,192,1)",
-              pointHoverBorderColor: "rgba(220,220,220,1)",
-              pointHoverBorderWidth: 2,
-              pointRadius: 1,
-              pointHitRadius: 10,
-              data: mock_crashtest_data,
-              spanGaps: false,
-            }
-          ]
-        };
+        var crashtest_data = [];
+        var crashtest_date = [];
+        fetch('history.json')
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(jsondata) {
+          for (var elem of jsondata) {
+            console.log(elem)
+            crashtest_date.push(elem['time']);
+            crashtest_data.push(elem['crashtest_fails']);
+          }
 
         var ctx = document.getElementById("crashtest_chart");
         var myLineChart = new Chart(ctx, {
@@ -116,7 +106,6 @@
           //options: options
         });
         */
-
         // CSS properties
         var diff = new Set(FIREFOX);
         for (var elem of STYLO_ALL) {
