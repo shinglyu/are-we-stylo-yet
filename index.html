@@ -31,8 +31,8 @@
     <h2>Are We Stylo Yet?</h2>
     <div id="cards">
     <div class="metric-container">
-      <h2>Remaining Properties</h2>
-      <p> Properties that are in Firefox but not in Stylo yet (<a href="https://manishearth.github.io/css-properties-list/">See what's missing</a>), should reach 100%</p>
+      <h2>Property progress</h2>
+      <p> Number of implemented Firefox properties in Stylo, out of <br> the total number of properties in Firefox (<a href="https://manishearth.github.io/css-properties-list/">See what's missing</a>), should reach 100%</p>
       <h1 id="properties">Loading...</h3>
     </div>
     <div class="metric-container">
@@ -60,7 +60,7 @@
     <a href="https://github.com/shinglyu/are-we-stylo-yet"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="css_properties_list.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://manishearth.github.io/css-properties-list/lists.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
 
 
@@ -107,14 +107,23 @@
         });
         */
         // CSS properties
-        var diff = new Set(FIREFOX);
-        for (var elem of STYLO_ALL) {
-          diff.delete(elem);
+
+        let fx_noprefix = new Set();
+        let stylo_noprefix = new Set();
+
+        for (prop of PROPS) {
+          if (setHasAgnostic(FIREFOX, prop)) {
+            fx_noprefix.add(prop);
+            fx_but_not_stylo = true;
+          }
+          if (setHasAgnostic(STYLO, prop)) {
+            stylo_noprefix.add(prop);
+          }
         }
 
-        var remaining_properties_count = diff.size;
+        var remaining_properties_count = new Set([...fx_noprefix].filter((x) => stylo_noprefix.has(x))).size;
         var properties = document.getElementById('properties');
-        properties.innerText = remaining_properties_count + "/" + FIREFOX.size;
+        properties.innerText = `${remaining_properties_count}/${fx_noprefix.size} (${Math.floor(100*remaining_properties_count/fx_noprefix.size)}%)`;
 
       });
 
