@@ -1,100 +1,5 @@
 [
   {
-    "date": "2016-07-21",
-    "reftest_fails": "3462",
-    "remaining_properties": ""
-  },
-  {
-    "date": "2016-08-01",
-    "reftest_fails": "",
-    "remaining_properties": ""
-  },
-  {
-    "date": "2016-08-05",
-    "reftest_fails": "",
-    "remaining_properties": ""
-  },
-  {
-    "date": "2016-08-08",
-    "reftest_fails": "",
-    "remaining_properties": ""
-  },
-  {
-    "date": "2016-08-16",
-    "reftest_fails": "8944",
-    "remaining_properties": ""
-  },
-  {
-    "date": "2016-08-18",
-    "reftest_fails": "9282",
-    "remaining_properties": ""
-  },
-  {
-    "date": "2016-08-29",
-    "reftest_fails": "",
-    "remaining_properties": "144"
-  },
-  {
-    "date": "2016-08-30",
-    "reftest_fails": "",
-    "remaining_properties": "228"
-  },
-  {
-    "date": "2016-09-06",
-    "reftest_fails": "",
-    "remaining_properties": "228"
-  },
-  {
-    "date": "2016-09-09",
-    "reftest_fails": "",
-    "remaining_properties": "228"
-  },
-  {
-    "date": "2016-09-21",
-    "reftest_fails": "2178",
-    "remaining_properties": "141"
-  },
-  {
-    "date": "2016-10-01",
-    "reftest_fails": "2270",
-    "remaining_properties": "141"
-  },
-  {
-    "date": "2016-10-11",
-    "reftest_fails": "2724",
-    "remaining_properties": "141"
-  },
-  {
-    "date": "2016-10-14",
-    "reftest_fails": "2728",
-    "remaining_properties": "133"
-  },
-  {
-    "date": "2016-10-17",
-    "reftest_fails": "2759",
-    "remaining_properties": "153"
-  },
-  {
-    "date": "2016-10-29",
-    "reftest_fails": "2738",
-    "remaining_properties": "152"
-  },
-  {
-    "date": "2016-11-08",
-    "reftest_fails": "2914",
-    "remaining_properties": "152"
-  },
-  {
-    "date": "2016-11-13",
-    "reftest_fails": "2952",
-    "remaining_properties": "108"
-  },
-  {
-    "date": "2016-11-28",
-    "reftest_fails": "3009",
-    "remaining_properties": "108"
-  },
-  {
     "date": "2016-12-01",
     "reftest_fails": "3020",
     "remaining_properties": "90"
@@ -151,6 +56,7 @@
     "crashtest_total": 3122,
     "reftest_passes":7572,
     "reftest_fails":5644,
-    "reftest_disabled":1162
+    "reftest_disabled":1162,
+    "remaining_properties": "57"
   }
 ]
