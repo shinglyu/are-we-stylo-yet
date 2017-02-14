@@ -39,32 +39,29 @@
       <h2>Crashtest failures</h2>
       <p>Number of failures in crashtest, should reach 0%</p>
       <h1 id="crashtest_fails">Loading...</h3>
-      <!--
-      <p>Warning: The chart is still under development, the data may not be correct</p>
       <canvas id="crashtest_chart" width="200" height="100"></canvas>
-      -->
 
     </div>
     <div class="metric-container">
       <h2>Reftest failures</h2>
       <p>Number of failures in reftest, should reach 0%</p>
       <h1 id="reftest_fails">Loading...</h3>
+      <canvas id="reftest_chart" width="200" height="100"></canvas>
     </div>
     <div class="metric-container">
       <h2>Reftest disabled</h2>
       <p>Crashes, intermittents; should reach 0%</p>
       <h1 id="reftest_disabled">Loading...</h3>
+      <canvas id="reftest_disabled_chart" width="200" height="100"></canvas>
     </div>
     </div>
 
     <a href="https://github.com/shinglyu/are-we-stylo-yet"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://manishearth.github.io/css-properties-list/lists.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
-
-
-      window.addEventListener('load', function(){
+      function load_numbers() {
         // Download the data
         fetch('data.json')
         .then(function(response) {
@@ -83,31 +80,60 @@
           percent = Math.round((jsondata['reftest_disabled'] / (jsondata['reftest_passes']+ jsondata['reftest_fails'] + jsondata['reftest_disabled'])) * 100);
           reftest.innerText = jsondata['reftest_disabled'] + "/" + (jsondata['reftest_passes']+ jsondata['reftest_fails'] + jsondata['reftest_disabled'])+ " (" + percent + "%)";
         });
+      }
 
-        /*
+      function create_charts(field_name, label, element_id) {
         //Charts
         var crashtest_data = [];
-        var crashtest_date = [];
+        var dates = [];
+        var data = {
+          "labels": [],
+          "datasets": []
+        }
+
         fetch('history.json')
         .then(function(response) {
           return response.json();
         })
         .then(function(jsondata) {
+
           for (var elem of jsondata) {
+            // console.log(elem)
+            dates.push(elem['date']);
             console.log(elem)
-            crashtest_date.push(elem['time']);
-            crashtest_data.push(elem['crashtest_fails']);
+            console.log(elem[field_name])
+            console.log(field_name)
+            crashtest_data.push(elem[field_name]);
           }
 
-        var ctx = document.getElementById("crashtest_chart");
-        var myLineChart = new Chart(ctx, {
-          type: 'line',
-          data: data,
-          //options: options
+          data["labels"] = dates;
+          data["datasets"].push({
+            "label": label,
+            "data": crashtest_data,
+          });
+          console.log(data)
+          var ctx = document.getElementById(element_id);
+          var chartInstance = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: {
+              scales: {
+                xAxes: [{
+                  type: 'time',
+                  time: {
+                    displayFormats: {
+                      quarter: 'DD/MM/YYYY'
+                    }
+                  }
+                }]
+              }
+            }
+          });
         });
-        */
-        // CSS properties
 
+      }
+
+      function load_remaining_properties() {
         let fx_noprefix = new Set();
         let stylo_noprefix = new Set();
 
@@ -124,7 +150,15 @@
         var remaining_properties_count = new Set([...fx_noprefix].filter((x) => stylo_noprefix.has(x))).size;
         var properties = document.getElementById('properties');
         properties.innerText = `${remaining_properties_count}/${fx_noprefix.size} (${Math.floor(100*remaining_properties_count/fx_noprefix.size)}%)`;
+      }
 
+
+      window.addEventListener('load', function(){
+        load_numbers();
+        load_remaining_properties();
+        create_charts("crashtest_fails", "crashtest", "crashtest_chart");
+        create_charts("reftest_fails", "reftest", "reftest_chart");
+        create_charts("reftest_disabled", "reftest", "reftest_disabled_chart");
       });
 
     </script>

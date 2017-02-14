@@ -1,7 +1,7 @@
 [
-  {"date":"12/5", "crashtest_fails": 100, "crashtest_total": 3122},
+  {"date":"2016-12-05", "crashtest_fails": 100, "crashtest_total": 3122},
   {
-    "date": "1/9",
+    "date": "2017-01-09",
     "crashtest_fails": 100,
     "crashtest_total": 3122,
     "reftest_passes": 5107,
@@ -9,13 +9,14 @@
     "reftest_disabled": 905
   },
   {
-    "date":"01/23",
+    "date":"2017-01-23",
+    "crashtest_fails": 100,
     "reftest_passes":7572,
     "reftest_fails":5644,
     "reftest_disabled":1162
   },
   {
-    "date": "02/14",
+    "date": "2017-02-14",
     "crashtest_fails": 100,
     "crashtest_total": 3122,
     "reftest_passes":7572,
