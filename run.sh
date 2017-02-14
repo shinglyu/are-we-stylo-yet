@@ -1,2 +1,3 @@
 cd ../stylo-incubator
-bash ../stylo-dashboard/update.sh > ../stylo-dashboard/data.json
+bash ../stylo-dashboard/update.sh
+bash ../stylo-dashboard/summarize_from_list.sh
