@@ -1,5 +1,16 @@
 [
   {
+    "date": "2017-04-25",
+    "reftest_fails": 3020,
+    "reftest_passes": 5107,
+    "reftest_disabled": 905,
+    "remaining_properties": 90,
+    "crashtest_fails": 100,
+    "crashtest_total": 3122,
+    "mochitest_fails": 681,
+    "mochitest_total": 26222
+  },
+  {
     "date": "2016-12-01",
     "reftest_fails": 3020,
     "reftest_passes": 5107,

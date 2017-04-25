@@ -55,6 +55,12 @@
       <h1 id="reftest_disabled">Loading...</h3>
       <canvas id="reftest_disabled_chart" width="200" height="100"></canvas>
     </div>
+    <div class="metric-container">
+      <h2>Mochitest failures</h2>
+      <p>Number of failures in mochitest, should reach 0%</p>
+      <h1 id="mochitest_fails">Loading...</h3>
+      <canvas id="mochitest_fails_chart" width="200" height="100"></canvas>
+    </div>
     </div>
 
     <a href="https://github.com/shinglyu/are-we-stylo-yet"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
@@ -69,8 +75,8 @@
           return response.json();
         })
         .then(function(jsondata) {
-          for (var idx in jsondata){
-            date = jsondata[idx];
+          //for (var idx in jsondata){
+            date = jsondata[0];
 
             var crashtest = document.getElementById('crashtest_fails');
             var percent = Math.round((date['crashtest_fails'] / date['crashtest_total']) * 100);
@@ -83,7 +89,11 @@
             var reftest = document.getElementById('reftest_disabled');
             percent = Math.round((date['reftest_disabled'] / (date['reftest_passes']+ date['reftest_fails'] + date['reftest_disabled'])) * 100);
             reftest.innerText = date['reftest_disabled'] + "/" + (date['reftest_passes']+ date['reftest_fails'] + date['reftest_disabled'])+ " (" + percent + "%)";
-          }
+
+            var mochitest = document.getElementById('mochitest_fails');
+            percent = Math.round((date['mochitest_fails'] / date['mochitest_total']) * 100);
+            mochitest.innerText = date['mochitest_fails'] + "/" + date['mochitest_total'] + " (" + percent + "%)";
+          //}
         });
       }
 
@@ -181,6 +191,7 @@
         create_charts("crashtest_fails", "crashtest", "crashtest_chart");
         create_charts("reftest_fails", "reftest", "reftest_chart");
         create_charts("reftest_disabled", "reftest", "reftest_disabled_chart");
+        create_charts("mochitest_fails", "mochitest", "reftest_fails_chart");
       });
 
     </script>
