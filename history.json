@@ -8,7 +8,9 @@
     "crashtest_fails": 100,
     "crashtest_total": 3122,
     "mochitest_fails": 681,
-    "mochitest_total": 26222
+    "mochitest_total": 26222,
+    "alexa_fails": 167,
+    "alexa_total": 169
   },
   {
     "date": "2016-12-01",
