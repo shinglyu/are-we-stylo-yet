@@ -1,8 +1,12 @@
 [
   {
     "date": "2016-12-01",
-    "reftest_fails": "3020",
-    "remaining_properties": "90"
+    "reftest_fails": 3020,
+    "reftest_passes": 5107,
+    "reftest_disabled": 905,
+    "remaining_properties": 90,
+    "crashtest_fails": 100,
+    "crashtest_total": 3122
   },
   {"date":"2016-12-05", "crashtest_fails": 100, "crashtest_total": 3122},
   {

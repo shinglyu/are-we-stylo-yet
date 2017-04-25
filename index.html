@@ -64,22 +64,26 @@
     <script type="text/javascript" charset="utf-8">
       function load_numbers() {
         // Download the data
-        fetch('data.json')
+        fetch('history.json')
         .then(function(response) {
           return response.json();
         })
         .then(function(jsondata) {
-          var crashtest = document.getElementById('crashtest_fails');
-          var percent = Math.round((jsondata['crashtest_fails'] / jsondata['crashtest_total']) * 100);
-          crashtest.innerText = jsondata['crashtest_fails'] + "/" + jsondata['crashtest_total'] + " (" + percent + "%)";
+          for (var idx in jsondata){
+            date = jsondata[idx];
 
-          var reftest = document.getElementById('reftest_fails');
-          percent = Math.round((jsondata['reftest_fails'] / (jsondata['reftest_passes']+ jsondata['reftest_fails'] + jsondata['reftest_disabled'])) * 100);
-          reftest.innerText = jsondata['reftest_fails'] + "/" + (jsondata['reftest_passes']+ jsondata['reftest_fails'] + jsondata['reftest_disabled'])+ " (" + percent + "%)";
+            var crashtest = document.getElementById('crashtest_fails');
+            var percent = Math.round((date['crashtest_fails'] / date['crashtest_total']) * 100);
+            crashtest.innerText = date['crashtest_fails'] + "/" + date['crashtest_total'] + " (" + percent + "%)";
 
-          var reftest = document.getElementById('reftest_disabled');
-          percent = Math.round((jsondata['reftest_disabled'] / (jsondata['reftest_passes']+ jsondata['reftest_fails'] + jsondata['reftest_disabled'])) * 100);
-          reftest.innerText = jsondata['reftest_disabled'] + "/" + (jsondata['reftest_passes']+ jsondata['reftest_fails'] + jsondata['reftest_disabled'])+ " (" + percent + "%)";
+            var reftest = document.getElementById('reftest_fails');
+            percent = Math.round((date['reftest_fails'] / (date['reftest_passes']+ date['reftest_fails'] + date['reftest_disabled'])) * 100);
+            reftest.innerText = date['reftest_fails'] + "/" + (date['reftest_passes']+ date['reftest_fails'] + date['reftest_disabled'])+ " (" + percent + "%)";
+
+            var reftest = document.getElementById('reftest_disabled');
+            percent = Math.round((date['reftest_disabled'] / (date['reftest_passes']+ date['reftest_fails'] + date['reftest_disabled'])) * 100);
+            reftest.innerText = date['reftest_disabled'] + "/" + (date['reftest_passes']+ date['reftest_fails'] + date['reftest_disabled'])+ " (" + percent + "%)";
+          }
         });
       }
 
