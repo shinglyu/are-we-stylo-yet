@@ -29,6 +29,7 @@
   </head>
   <body>
     <h2>Are We Stylo Yet?</h2>
+    <p id="last_updated"> Last updated: loading...</p>
     <div id="cards">
     <div class="metric-container">
       <h2>Unimplemented properties</h2>
@@ -102,6 +103,10 @@
             var alexa = document.getElementById('alexa_fails');
             percent = Math.round((date['alexa_fails'] / date['alexa_total']) * 100);
             alexa.innerText = date['alexa_fails'] + "/" + date['alexa_total'] + " (" + percent + "%)";
+
+            var updated = document.getElementById('last_updated');
+            updated.innerText = "Last updated: " + date['date'];
+
           //}
         });
       }
